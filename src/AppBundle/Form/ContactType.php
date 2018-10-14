@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PersonType extends AbstractType
+class ContactType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,11 +15,11 @@ class PersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name')
             ->add('firstname')
             ->add('lastname')
-            ->add('name')
-            ->add('mobilePhone')
             ->add('email')
+            ->add('mobilephone')
         ;
     }
     
@@ -29,7 +29,7 @@ class PersonType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Person'
+            'data_class' => 'AppBundle\Entity\Contact'
         ));
     }
 
@@ -38,6 +38,6 @@ class PersonType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_person';
+        return 'appbundle_contact';
     }
 }

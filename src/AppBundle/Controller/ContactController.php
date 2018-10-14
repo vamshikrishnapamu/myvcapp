@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Person;
-use AppBundle\Form\PersonType;
+use AppBundle\Entity\Contact;
+use AppBundle\Form\ContactType;
 
 /**
- * Person controller.
+ * Contact controller.
  *
- * @Route("/person")
+ * @Route("/contact")
  */
-class PersonController extends Controller
+class ContactController extends Controller
 {
 
     /**
-     * Lists all Person entities.
+     * Lists all Contact entities.
      *
-     * @Route("/", name="person")
+     * @Route("/", name="contact")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class PersonController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Person')->findAll();
+        $entities = $em->getRepository('AppBundle:Contact')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Person entity.
+     * Creates a new Contact entity.
      *
-     * @Route("/", name="person_create")
+     * @Route("/", name="contact_create")
      * @Method("POST")
-     * @Template("AppBundle:Person:new.html.twig")
+     * @Template("AppBundle:Contact:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Person();
+        $entity = new Contact();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class PersonController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('person_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('contact_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class PersonController extends Controller
     }
 
     /**
-     * Creates a form to create a Person entity.
+     * Creates a form to create a Contact entity.
      *
-     * @param Person $entity The entity
+     * @param Contact $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Person $entity)
+    private function createCreateForm(Contact $entity)
     {
-        $form = $this->createForm(new PersonType(), $entity, array(
-            'action' => $this->generateUrl('person_create'),
+        $form = $this->createForm(new ContactType(), $entity, array(
+            'action' => $this->generateUrl('contact_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class PersonController extends Controller
     }
 
     /**
-     * Displays a form to create a new Person entity.
+     * Displays a form to create a new Contact entity.
      *
-     * @Route("/new", name="person_new")
+     * @Route("/new", name="contact_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Person();
+        $entity = new Contact();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class PersonController extends Controller
     }
 
     /**
-     * Finds and displays a Person entity.
+     * Finds and displays a Contact entity.
      *
-     * @Route("/{id}", name="person_show")
+     * @Route("/{id}", name="contact_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class PersonController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Person')->find($id);
+        $entity = $em->getRepository('AppBundle:Contact')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Person entity.');
+            throw $this->createNotFoundException('Unable to find Contact entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class PersonController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Person entity.
+     * Displays a form to edit an existing Contact entity.
      *
-     * @Route("/{id}/edit", name="person_edit")
+     * @Route("/{id}/edit", name="contact_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class PersonController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Person')->find($id);
+        $entity = $em->getRepository('AppBundle:Contact')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Person entity.');
+            throw $this->createNotFoundException('Unable to find Contact entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class PersonController extends Controller
     }
 
     /**
-    * Creates a form to edit a Person entity.
+    * Creates a form to edit a Contact entity.
     *
-    * @param Person $entity The entity
+    * @param Contact $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Person $entity)
+    private function createEditForm(Contact $entity)
     {
-        $form = $this->createForm(new PersonType(), $entity, array(
-            'action' => $this->generateUrl('person_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new ContactType(), $entity, array(
+            'action' => $this->generateUrl('contact_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class PersonController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Person entity.
+     * Edits an existing Contact entity.
      *
-     * @Route("/{id}", name="person_update")
+     * @Route("/{id}", name="contact_update")
      * @Method("PUT")
-     * @Template("AppBundle:Person:edit.html.twig")
+     * @Template("AppBundle:Contact:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Person')->find($id);
+        $entity = $em->getRepository('AppBundle:Contact')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Person entity.');
+            throw $this->createNotFoundException('Unable to find Contact entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class PersonController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('person_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('contact_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class PersonController extends Controller
         );
     }
     /**
-     * Deletes a Person entity.
+     * Deletes a Contact entity.
      *
-     * @Route("/{id}", name="person_delete")
+     * @Route("/{id}", name="contact_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class PersonController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Person')->find($id);
+            $entity = $em->getRepository('AppBundle:Contact')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Person entity.');
+                throw $this->createNotFoundException('Unable to find Contact entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('person'));
+        return $this->redirect($this->generateUrl('contact'));
     }
 
     /**
-     * Creates a form to delete a Person entity by id.
+     * Creates a form to delete a Contact entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +238,7 @@ class PersonController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('person_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('contact_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

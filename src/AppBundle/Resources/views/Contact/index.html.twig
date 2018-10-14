@@ -1,36 +1,36 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Person list</h1>
+    <h1>Contact list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Name</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
-                <th>Name</th>
-                <th>Mobilephone</th>
                 <th>Email</th>
+                <th>Mobilephone</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('person_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('contact_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
                 <td>{{ entity.firstname }}</td>
                 <td>{{ entity.lastname }}</td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.mobilePhone }}</td>
                 <td>{{ entity.email }}</td>
+                <td>{{ entity.mobilephone }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('person_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('contact_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('person_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('contact_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -41,7 +41,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('person_new') }}">
+            <a href="{{ path('contact_new') }}">
                 Create a new entry
             </a>
         </li>
